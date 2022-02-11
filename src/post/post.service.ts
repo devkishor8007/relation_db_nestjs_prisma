@@ -3,17 +3,17 @@ import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
-export class UserService {
+export class PostService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  createUser(data: Prisma.UserCreateInput) {
-    return this.prismaService.user.create({ data });
+  createProfile(createPost: Prisma.PostCreateInput) {
+    return this.prismaService.post.create({ data: createPost });
   }
 
-  getAllUser() {
-    return this.prismaService.user.findMany({
+  get() {
+    return this.prismaService.post.findMany({
       include: {
-        post: true,
+        user: true,
       },
     });
   }
